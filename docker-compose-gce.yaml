@@ -12,19 +12,20 @@ services:
   db:
     image: postgres:15.4
     volumes:
-      - postgres-data:/var/lib/postgresql/data
+      - postgres-data-266:/var/lib/postgresql/data
     environment:
       - POSTGRES_USER=iniad
       - POSTGRES_PASSWORD=password
       - POSTGRES_DB=testdb
   nginx:
     image: nginx:latest
-    ports:
-      - 8080:80
+    container_name: mynginx-266
     volumes:
       - ./nginx/conf:/etc/nginx/conf.d
       - ./src/collected_static:/static
+    ports:
+      - 80:80
     depends_on:
       - django
 volumes:
-  postgres-data:
+  postgres-data-266:
